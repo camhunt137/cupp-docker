@@ -1,0 +1,60 @@
+biolib_version: 2
+
+modules:
+  main:
+    default_machine: cpu.medium
+    image: "dockerhub://camhunt137/cupp:v1"
+    command: ./cupp-predict --library lib/8x2_90_v2021_M7_transferred_CUPPlibrary -v --cwd output/
+    working_directory: /app/
+    input_files:
+      - COPY / /app/
+    output_files:
+      - COPY /app/output/ /
+description_file: app/readme.md
+arguments:
+  - description: Query fasta file (Required).
+    key: --query
+    required: true
+    type: text-file
+  - description: Treat the query as DNA and locate ORFs and predict them individually
+    key: " "
+    default_value: " "
+    type: toggle
+    required: false
+    options:
+      "on": "--genomic"
+      "off": " "
+    sub_arguments:
+      "--genomic":
+        - key: --orfminlength
+          description: "Minimum number of bases in ORFs. If 0, the sequence will be treated as one ORF in frame and do not preform ORF searching [default: 60]"
+          type: number
+          default_value: 60
+  - description: Do not do domain filtering, but keep all domains.
+    key: " "
+    default_value: " "
+    type: toggle
+    required: false
+    options:
+      "on": "--filteroff"
+      "off": " "
+  - description: "Number of positions that must be covered within a domain for it to be valid [default: 0.5]"
+    key: --cratio
+    type: number
+    default_value: 0.5
+  - description: "How much can a domain overlap with an already assigned domain [default: 0.4]"
+    key: --overlap
+    type: number
+    default_value: 0.4
+  - description: "Minimum percentage of frequency of cupp group for hit [default: 0.01]"
+    key: --eratio
+    type: number
+    default_value: 0.01
+  - description: "Minimum number of positions covered to be a domain [default: 16]"
+    key: --domainmin
+    type: number
+    default_value: 16
+  - description: "Frequency for a position to be included in the domain [default: 0.2]"
+    key: --posthreshold
+    type: number
+    default_value: 0.2

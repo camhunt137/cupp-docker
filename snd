@@ -1,0 +1,20 @@
+ - description: Treat the query as DNA and locate ORFs and predict them individually
+    key: --genomic
+    default_value: " "
+    type: toggle
+    options:
+      "on": "on"
+      "off": ""
+    sub_arguments:
+      "on":
+        - key: --orfminlength
+          description: "Minimum number of bases in ORFs. If 0, the sequence will be treated as one ORF in frame and do not preform ORF searching [default: 60]"
+          type: number
+          default_value: 60
+  - description: Do not do domain filtering, but keep all domains.
+    key: --filteroff
+    default_value: "off"
+    type: toggle
+    options:
+      "on": "on"
+      "off": "off"
