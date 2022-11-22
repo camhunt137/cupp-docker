@@ -8,7 +8,8 @@ WORKDIR /app
 COPY app/cupp-predict /app
 COPY app/readme.md /app
 COPY app/examples /app/examples
-COPY app/lib /app/lib
+#this copies both library files, small and large
+COPY app/lib /app/lib 
 COPY app/license /app/license
 
 # make an ouput directory
@@ -20,7 +21,7 @@ RUN chmod +x /app/cupp-predict
 # set no_color to true, this will disable the color output in the terminal as biolib does not support this
 ENV NO_COLOR=1
 
-# run the app example
-CMD ./cupp-predict --query examples/protein.faa --library lib/8x2_90_v2021_M7_transferred_CUPPlibrary -v --cwd output/ 
+# run the app example, small library
+CMD ./cupp-predict --query examples/protein.faa --library lib/8x2_90_v1.1.0_transferred_CUPPlibrary_GH30_GH43 -v --cwd output/ 
 
 
