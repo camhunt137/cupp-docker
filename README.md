@@ -1,8 +1,17 @@
 # cupp biolib example
 
+Main workflow:
+
+- Build docker image
+- Test image with docker/run
+- Tag image then push to dockerhub
+- Then push the biolib config file to biolib
+
 ## make docker/build
 
 Build the docker image. This build a docker image which contains cupp and the relevant library files. The entry point just runs the example protein fasta in the app directory. See the Dockerfile for a more complete explanation.
+
+I have not included the lib files in /app/lib as they are just too big to put on github. I can provide a separate link.
 
 ## make docker/run
 
